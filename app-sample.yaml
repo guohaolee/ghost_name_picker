@@ -1,0 +1,15 @@
+# Sample of app.yaml
+runtime: python37
+
+env_variables:
+  GOOGLE_CLIENT_ID: "xxx"
+  GOOGLE_CLIENT_SECRET: "xxx"
+  SECRET_KEY: b'\xxx'
+
+# [START handlers]
+handlers:
+- url: /static
+  static_dir: static
+- url: /.*
+  script: auto
+# [END handlers]
