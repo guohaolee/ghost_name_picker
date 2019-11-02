@@ -1,0 +1,32 @@
+{% extends "template.html" %}
+<!DOCTYPE html>
+{% block body %}
+<body>
+    <script>
+
+        </script>
+    <div>
+        <form action="" method="post" >
+        <table class="table table-dark" id='choice' data-col="ghost_name">
+            <thead>
+                <tr>
+                <th scope="col">Ghost Name</th>
+                <th scope="col">Your Name</th>
+                <th scope="col">select</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for name,result in recommendation %}
+                <tr>
+                    <td><input type="hidden" name="ghost_name" value="{{name}}">{{name}}</td>
+                    <td><input type="hidden" name="ghost_user_name" value="{{result}}">{{result}}</td>
+                    <td><button type="submit"> select </button></td>
+                </tr>  
+                {% endfor %}
+            </tbody>
+        </table>
+        </form>
+    </div>
+</body>
+
+{% endblock %}

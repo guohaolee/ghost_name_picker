@@ -1,0 +1,42 @@
+<!-- {% extends "template.html" %} -->
+
+<!DOCTYPE html>
+<!-- {% block body %} -->
+<body>
+    <div>class="home"</div>
+        <h1 align="center">Pick a name</h1>
+        <div class="center-on-page"> 
+        <form action="" method="post" >
+                <div class='first_name'>
+                    {{ form.first_name(placeholder='Joe') }} {{ form.first_name.label }}
+                    {% if form.first_name.errors %}
+                        <ul class="errors">
+                            {% for error in form.first_name.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class='last_name'>
+                    {{ form.last_name(placeholder='Blah') }} {{ form.last_name.label }}
+                    {% if form.last_name.errors %}
+                        <ul class="errors">{% for error in form.last_name.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                    {% endif %}
+                </div>
+                <div class="input submit">
+                        <input type="submit" value="Submit">
+                </div>
+            </form>
+
+        </div>
+            {% for message in get_flashed_messages() %}
+                <div class="alert alert-warning">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+</body>
+<!-- {% endblock %} -->
+</html>
+
