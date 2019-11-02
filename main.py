@@ -26,10 +26,14 @@ def home():
 
     if google_auth.is_logged_in():
         message = "Change your phantom name"
+        login = True
+        email = session['user_email']
     else:
         message = "Get a Phantom name"
+        login = False
+        email = None
 
-    return render_template('home.html', record=rec, btn=message)
+    return render_template('home.html', record=rec, btn=message, user_login=login, user_email=email)
 
 @app.route('/ghost_name_form', methods=['GET', 'POST'])
 def ghost_name_form():
@@ -69,6 +73,7 @@ def ghost_name_recommendation():
         ghost_name = request.form['ghost_name']
         user_ghost_name = request.form['ghost_user_name']
 
+        print(ghost_name, "->", user_ghost_name)
         # reset the current used ghostname
         GhostRecord.reset(session['user_email'])
 

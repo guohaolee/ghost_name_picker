@@ -12,13 +12,14 @@ import googleapiclient.discovery
 from lib.db.user import User
 from lib.db.ghost_record import GhostRecord
 
-ACCESS_TOKEN_URI = 'https://www.googleapis.com/oauth2/v4/token'
-AUTHORIZATION_URL = 'https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&prompt=consent'
+ACCESS_TOKEN_URI = os.environ.get("ACCESS_TOKEN_URI")
+AUTHORIZATION_URL = os.environ.get("AUTHORIZATION_URL")
 
-AUTHORIZATION_SCOPE ='openid email profile'
+AUTHORIZATION_SCOPE = 'openid email profile'
 
-AUTH_REDIRECT_URI = 'https://phq-nz-ghost-name-picker.appspot.com/google/auth'
-BASE_URI = 'https://phq-nz-ghost-name-picker.appspot.com'
+AUTH_REDIRECT_URI = os.environ.get("AUTH_REDIRECT_URI")
+BASE_URI = os.environ.get("BASE_URI")
+
 CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", default=False)
 CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", default=False)
 
