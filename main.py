@@ -40,7 +40,11 @@ def home():
         login = False
         email = None
 
-    return render_template('home.html', record=rec, btn=message, user_login=login, user_email=email)
+    # set this as global variable for all templates
+    app.jinja_env.globals['login'] = login
+    app.jinja_env.globals['email'] = email
+
+    return render_template('home.html', record=rec, btn=message)
 
 @app.route('/ghost_name_form', methods=['GET', 'POST'])
 def ghost_name_form():
@@ -74,6 +78,8 @@ def ghost_name_recommendation():
     rand = random.sample([record.name for record in result], 3)
 
     end_result = [user_input.get('first_name') + " '" + choice + "' " + user_input.get('last_name') for choice in rand]
+    print(rand)
+    print(end_result)
     mapping = zip(rand, end_result)
 
     if request.method == 'POST':

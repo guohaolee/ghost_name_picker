@@ -9,9 +9,9 @@
     
     <ol>
         <li><a href="{{ url_for('home') }}">Home</a></li>
-        {% if user_login %}
+        {% if login %}
           <li style="float:right"> <a href="{{url_for('google_auth.logout')}}">Logout</a> </li>
-          <li style="float:right"> <a href="/">{{user_email}}</a> </li>
+          <li style="float:right"> <a href="/">{{email}}</a> </li>
         {% else %}
           <li style="float:right"> <a href="{{url_for('google_auth.login')}}">Login</a> </li>
         {% endif %}
@@ -19,7 +19,7 @@
 
 </head>
     
-<body >  
+<body > 
       {% block title %}
       {% endblock %}
       
