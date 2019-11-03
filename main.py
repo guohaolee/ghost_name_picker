@@ -15,6 +15,10 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY")
 app.register_blueprint(google_auth.app)
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
 @app.route('/')
 def home():
     rec = []
@@ -25,9 +29,12 @@ def home():
                     'email': r.user_email})
 
     if google_auth.is_logged_in():
-        message = "Change your phantom name"
         login = True
         email = session['user_email']
+        if not GhostRecord.has_record(email):
+            message = "Get a Phantom name"
+        else:
+            message = "Change your phantom name"
     else:
         message = "Get a Phantom name"
         login = False
@@ -46,10 +53,10 @@ def ghost_name_form():
 
             session['user_input'] = val
 
-        if input_form.validate():
-            return redirect(url_for("ghost_name_recommendation"))
-        else:
-            flash('All the form fields are required.')
+            if input_form.validate():
+                return redirect(url_for("ghost_name_recommendation"))
+            else:
+                flash('All the form fields are required.')
 
         return render_template('form.html', form=input_form)
 

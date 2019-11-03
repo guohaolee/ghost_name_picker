@@ -1,18 +1,21 @@
 {% extends "template.html" %}
+
 <!DOCTYPE html>
 {% block body %}
 <body>
-    <script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/suggestions.css') }}">
 
-        </script>
+    <div>
+        <h1>Pick the choosen one..</h1>
+    </div>
     <div>
         <form action="" method="post" >
-        <table class="table table-dark" id='choice' data-col="ghost_name">
+        <table class="cinereousTable">
             <thead>
                 <tr>
                 <th scope="col">Ghost Name</th>
                 <th scope="col">Your Name</th>
-                <th scope="col">select</th>
+                <th scope="col">Decision</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,7 +23,7 @@
                 <tr>
                     <td><input type="hidden" name="ghost_name" value="{{name}}">{{name}}</td>
                     <td><input type="hidden" name="ghost_user_name" value="{{result}}">{{result}}</td>
-                    <td><button type="submit"> select </button></td>
+                    <td> <button class='button' type="submit">Pick Me</button> </td>
                 </tr>  
                 {% endfor %}
             </tbody>
