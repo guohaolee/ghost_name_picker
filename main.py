@@ -78,15 +78,13 @@ def ghost_name_recommendation():
     rand = random.sample([record.name for record in result], 3)
 
     end_result = [user_input.get('first_name') + " '" + choice + "' " + user_input.get('last_name') for choice in rand]
-    print(rand)
-    print(end_result)
+
     mapping = zip(rand, end_result)
 
     if request.method == 'POST':
-        ghost_name = request.form['ghost_name']
-        user_ghost_name = request.form['ghost_user_name']
+        ghost_name = request.form.get('id', None)
+        user_ghost_name = request.form.get('selected', None)
 
-        print(ghost_name, "->", user_ghost_name)
         # reset the current used ghostname
         GhostRecord.reset(session['user_email'])
 
@@ -104,4 +102,4 @@ def ghost_name_recommendation():
     return render_template('suggestions.html', recommendation=mapping)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

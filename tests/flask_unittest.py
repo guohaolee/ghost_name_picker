@@ -2,8 +2,11 @@ from main import app
 import os
 import unittest
 import random
+import json
 from string import ascii_lowercase, digits
 from flask import session
+
+from lib.google_auth import is_logged_in
 
 from fireo.models import Model
 from fireo.fields import TextField, NumberField, IDField, DateTime
@@ -65,66 +68,6 @@ class FlaskTestCase(unittest.TestCase):
     def test_db(self):
         result = TestDB.collection.filter('name', '==', self.name).get()
         self.assertEqual(result.name, self.name)
-
-    # Test on button message
-    def home_button_test(self):
-        session['user_email'] = 'Test@email.com'
-
-    # # Ensure articles works
-    # def test_articles_page(self):
-    #     tester = app.test_client(self)
-    #     response = tester.get('/articles', content_type='html/text')
-    #     self.assertTrue('Articles' in response.data)
-
-    # # ensure login works
-    # def test_login(self):
-    #     tester = app.test_client(self)
-    #     response = tester.post(
-    #         '/login',
-    #         data=dict(username="admin",password="admin"),
-    #         follow_redirects=True
-    #     )
-    #     self.assertIn('You are now logged in', response.data)
-
-    # # Ensure logout behaves correctly
-    # def test_logout(self):
-    #     tester = app.test_client(self)
-    #     response = tester.post(
-    #         '/login',
-    #         data=dict(username="admin",password="admin"),
-    #         follow_redirects=True
-    #     )
-    #     response = tester.get('/logout', follow_redirects=True)
-    #     self.assertIn('You are now logged out', response.data)
-
-    # # ensure dashboard works
-    # def test_dash(self):
-    #     tester = app.test_client(self)
-    #     response = tester.post(
-    #         '/login',
-    #         data=dict(username="admin",password="admin"),
-    #         follow_redirects=True
-    #     )
-    #     response = tester.get('/dashboard', content_type='html/text')
-    #     self.assertIn('Dashboard', response.data)
-
-    # # ensure add article works
-    # def test_add_article(self):
-    #     tester = app.test_client(self)
-    #     response = tester.post(
-    #         '/login',
-    #         data=dict(username="admin",password="admin"),
-    #         follow_redirects=True
-    #     )
-    #     response = tester.get('/dashboard', content_type='html/text')
-    #     response = tester.get('/add_article', content_type='html/text')
-    #     self.assertIn('Add Article', response.data)
-
-
-    # ensure login via google works
-    # Python unittests does not support external links
-    # ensure login via facebook works
-    # Python unittests does not support external links
 
 if __name__ == "__main__":
     suite = unittest.TestLoader().loadTestsFromTestCase(FlaskTestCase)
