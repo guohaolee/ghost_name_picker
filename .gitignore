@@ -2,3 +2,7 @@ app.yaml
 .venv/*
 */__pycache__/*
 */*/__pycache__/*
+.vscode/settings.json
+sample.unittest.py
+__pycache__/main.cpython-37.pyc
+.DS_Store

@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired
 class UserInfoInput(Form):
     """ user info form """
 
-    first_name = StringField('first_ame', [
+    first_name = StringField('first_name', [
         validators.DataRequired(message=('Don\'t be shy!'))
     ])
 

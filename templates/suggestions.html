@@ -1,31 +1,52 @@
 {% extends "template.html" %}
+
 <!DOCTYPE html>
 {% block body %}
 <body>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/suggestions.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
-
-        </script>
+        $(document).ready(function(){
+          $('.suggestions').on('click', '.select_td', function(){
+             var _id = this.id;
+             var name = $('#listing'+_id).text();
+             var result = $('#testing'+_id).attr('class');
+             
+             $.ajax({
+               url: "{{url_for('ghost_name_recommendation') }}",
+               type: "POST",
+               data: {id:_id, selected: result},
+               success: function(response) {
+                // $("#info"+_id).html(response.result);
+                location.href = "{{url_for('home') }}"
+               }
+              });
+          });
+        });
+      </script>
     <div>
-        <form action="" method="post" >
-        <table class="table table-dark" id='choice' data-col="ghost_name">
+        <h1>Pick the choosen one..</h1>
+    </div>
+    <div class='suggestions'>
+        <table class="cinereousTable">
             <thead>
                 <tr>
                 <th scope="col">Ghost Name</th>
                 <th scope="col">Your Name</th>
-                <th scope="col">select</th>
+                <th scope="col">Decision</th>
                 </tr>
             </thead>
             <tbody>
                 {% for name,result in recommendation %}
                 <tr>
-                    <td><input type="hidden" name="ghost_name" value="{{name}}">{{name}}</td>
-                    <td><input type="hidden" name="ghost_user_name" value="{{result}}">{{result}}</td>
-                    <td><button type="submit"> select </button></td>
+                    <td id='listing{{name}}' class='{{name}}'>{{name}}</td>
+                    <td id='testing{{name}}', class='{{result}}'>{{result}}</td>
+                    <td> <button id ='{{name}}' class='select_td'>Pick Me</button> </td>
                 </tr>  
                 {% endfor %}
             </tbody>
         </table>
-        </form>
+        
     </div>
 </body>
 

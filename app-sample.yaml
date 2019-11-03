@@ -5,6 +5,10 @@ env_variables:
   GOOGLE_CLIENT_ID: "xxx"
   GOOGLE_CLIENT_SECRET: "xxx"
   SECRET_KEY: b'\xxx'
+  BASE_URI: 'http://localhost:5000'
+  AUTH_REDIRECT_URI: 'http://localhost:5000/google/auth'
+  ACCESS_TOKEN_URI: 'https://www.googleapis.com/oauth2/v4/token'
+  AUTHORIZATION_URL: 'https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&prompt=consent'
 
 # [START handlers]
 handlers:

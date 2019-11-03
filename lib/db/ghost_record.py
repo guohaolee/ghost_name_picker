@@ -43,3 +43,11 @@ class GhostRecord(Model):
             r.user_email = None
             r.user_ghost_name = None
             r.save()
+
+    @classmethod
+    def has_record(cls, email):
+        result = cls.collection.filter('user_email', '==', email).get()
+        if result:
+            return True
+        else:
+            return False
